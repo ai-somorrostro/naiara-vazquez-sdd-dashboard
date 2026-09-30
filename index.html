@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NAIARA SDD · Token Dashboard 2099</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="bg-orbs" aria-hidden="true"><span></span><span></span><span></span></div>
+<header class="hero">
+  <div>
+    <p class="eyebrow">NAIARA-VAZQUEZ-SDD · LIVE DATA</p>
+    <h1>TOKEN<span>DASHBOARD</span></h1>
+    <p class="sub">10 modelos · precios · latencia · consumo — todo desde <code>mock-data.json</code></p>
+  </div>
+  <div class="hero-stats">
+    <div class="stat"><b id="stModels">–</b><i>modelos</i></div>
+    <div class="stat"><b id="stCost">–</b><i>coste/día $</i></div>
+    <div class="stat"><b id="stTokens">–</b><i>tokens/día</i></div>
+    <div class="stat"><b id="stFast">–</b><i>TTFT min</i></div>
+  </div>
+</header>
+
+<section class="controls">
+  <input id="q" type="search" placeholder="🔍 Filtrar por nombre… (ej: deepseek)" autocomplete="off">
+  <select id="mod">
+    <option value="">Modalidad input: todas</option>
+    <option value="Text">Text</option>
+    <option value="Text+Image">Text+Image</option>
+  </select>
+  <label class="range">TTFT máx <b id="ttftVal">900ms</b>
+    <input id="ttft" type="range" min="190" max="900" step="10" value="900">
+  </label>
+  <button id="clear" type="button">✕ Limpiar</button>
+  <span id="count" class="count"></span>
+</section>
+
+<main class="grid">
+  <section class="panel wide"><h2>💲 Precio por token (input vs output)</h2><div id="chPrices" class="chart"></div></section>
+  <section class="panel"><h2>⚡ TTFT por modelo</h2><div id="chTtft" class="chart"></div></section>
+  <section class="panel"><h2>🖼️ Modalidad input</h2><div id="chMod" class="chart"></div></section>
+  <section class="panel wide"><h2>📦 Consumo diario (input + output apilado)</h2><div id="chUse" class="chart"></div></section>
+  <section class="panel wide"><h2>📋 Modelos <small>(clic cabecera para ordenar · clic fila para detalle)</small></h2>
+    <div class="table-wrap"><table id="tbl">
+      <thead><tr>
+        <th data-k="name">Modelo ⇅</th><th data-k="inputPricePerToken">In $/tok ⇅</th>
+        <th data-k="outputPricePerToken">Out $/tok ⇅</th><th data-k="ttft_ms">TTFT ⇅</th>
+        <th data-k="costDay">Coste/día $ ⇅</th><th data-k="tokensDay">Tokens/día ⇅</th>
+      </tr></thead>
+      <tbody id="rows"></tbody>
+    </table></div>
+  </section>
+</main>
+
+<div id="modal" class="modal hidden"><div class="modal-card">
+  <button id="close" type="button">✕</button>
+  <h3 id="mName"></h3><p id="mMeta" class="meta"></p>
+  <div id="mBars"></div><div id="mNums" class="mnums"></div>
+</div></div>
+
+<footer>Hecho con datos locales · <code>fetch('mock-data.json')</code> · sin dependencias</footer>
+<script src="app.js"></script>
+</body>
+</html>
